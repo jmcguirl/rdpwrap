@@ -1,6 +1,6 @@
 [Main]
 ; Last updated date
-Updated=2017-06-10
+Updated=2018-10-10
 ; Address to log file (RDP Wrapper will write it, if exists)
 LogFile=\rdpwrap.txt
 ; Hook SLPolicy API on Windows NT 6.0
@@ -53,6 +53,7 @@ CDefPolicy_Query_eax_rdi=B80001000089873806000090
 CDefPolicy_Query_eax_ecx=B80001000089812003000090
 CDefPolicy_Query_eax_ecx_jmp=B800010000898120030000EB0E
 CDefPolicy_Query_eax_rcx=B80001000089813806000090
+CDefPolicy_Query_edi_rcx=BF0001000089B938060000909090
 
 [6.0.6000.16386]
 ; HOW TO search CSessionArbitrationHelper::IsSingleSessionPerUserEnabled function in IDA Pro:
@@ -342,6 +343,38 @@ DefPolicyPatch.x64=1
 DefPolicyOffset.x64=17AD2
 DefPolicyCode.x64=CDefPolicy_Query_eax_rdi
 
+[6.1.7600.20890]
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=19E2D
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=17DF2
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=196FB
+DefPolicyCode.x86=CDefPolicy_Query_eax_esi
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=17B0E
+DefPolicyCode.x64=CDefPolicy_Query_eax_rdi
+
+[6.1.7600.21316]
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=19E2D
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=17E3E
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=196FB
+DefPolicyCode.x86=CDefPolicy_Query_eax_esi
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=17B5E
+DefPolicyCode.x64=CDefPolicy_Query_eax_rdi
+
 [6.1.7601.17514]
 ; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
 ; Imagebase: 6F2E0000
@@ -514,6 +547,54 @@ DefPolicyPatch.x64=1
 DefPolicyOffset.x64=17DC6
 DefPolicyCode.x64=CDefPolicy_Query_eax_rdi
 
+[6.1.7601.21650]
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=1A49D
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=180BE
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=19D53
+DefPolicyCode.x86=CDefPolicy_Query_eax_esi
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=17D5A
+DefPolicyCode.x64=CDefPolicy_Query_eax_rdi
+
+[6.1.7601.21866]
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=1A49D
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=180BE
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=19D53
+DefPolicyCode.x86=CDefPolicy_Query_eax_esi
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=17D5A
+DefPolicyCode.x64=CDefPolicy_Query_eax_rdi
+
+[6.1.7601.22104]
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=1A49D
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=180C6
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=19D53
+DefPolicyCode.x86=CDefPolicy_Query_eax_esi
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=17D5E
+DefPolicyCode.x64=CDefPolicy_Query_eax_rdi
+
 [6.1.7601.22843]
 ; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
 ; Imagebase: 6F2E0000
@@ -571,6 +652,22 @@ DefPolicyOffset.x86=19E29
 DefPolicyCode.x86=CDefPolicy_Query_eax_esi
 DefPolicyPatch.x64=1
 DefPolicyOffset.x64=17CE2
+DefPolicyCode.x64=CDefPolicy_Query_eax_rdi
+
+[6.1.7601.24234]
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=1A675
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=17F56
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=19E41
+DefPolicyCode.x86=CDefPolicy_Query_eax_esi
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=17D2E
 DefPolicyCode.x64=CDefPolicy_Query_eax_rdi
 
 [6.2.8102.0]
@@ -1153,6 +1250,96 @@ SLInitOffset.x86=18488
 SLInitFunc.x86=New_CSLQuery_Initialize
 SLInitHook.x64=1
 SLInitOffset.x64=5DBD0
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[6.3.9600.18708]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=B35D8
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8B376
+LocalOnlyCode.x64=nopjmp
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=370F5
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=36FE9
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3CFD9
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=457D5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=18308
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=5DB70
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[6.3.9600.18928]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=B39D8
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8B25D
+LocalOnlyCode.x64=nopjmp
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=37D25
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=36C09
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3D6F9
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=45495
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=18328
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=5D830
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[6.3.9600.19093]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=B3958
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8AE4E
+LocalOnlyCode.x64=nopjmp
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=3F045
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=36BC9
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3D899
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=45305
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=18288
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=5D660
 SLInitFunc.x64=New_CSLQuery_Initialize
 
 [6.4.9841.0]
@@ -2155,6 +2342,66 @@ SLInitHook.x86=1
 SLInitOffset.x86=45636
 SLInitFunc.x86=New_CSLQuery_Initialize
 
+[10.0.14393.1737]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A6198
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8D861
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=35AD5
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=299A4
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=30039
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=1AFC5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=45724
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=C930
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.14393.2457]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A6248
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8D811
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=36CE5
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=29CF4
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=31209
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=1B545
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=45824
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=C920
+SLInitFunc.x64=New_CSLQuery_Initialize
+
 [10.0.14901.1000]
 ; Patch CEnforcementCore::GetInstanceOfTSLicense
 LocalOnlyPatch.x86=1
@@ -3001,6 +3248,42 @@ SLInitHook.x64=1
 SLInitOffset.x64=D1EC
 SLInitFunc.x64=New_CSLQuery_Initialize
 
+[10.0.15063.994]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8CB01
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x64=1
+SingleUserOffset.x64=15EA4
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=FAE5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=234DC
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.15063.1155]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8CB01
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x64=1
+SingleUserOffset.x64=15EA4
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=FAE5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=234DC
+SLInitFunc.x64=New_CSLQuery_Initialize
+
 [10.0.16179.1000]
 ; Patch CEnforcementCore::GetInstanceOfTSLicense
 LocalOnlyPatch.x86=1
@@ -3119,6 +3402,924 @@ SLInitOffset.x86=46462
 SLInitFunc.x86=New_CSLQuery_Initialize
 SLInitHook.x64=1
 SLInitOffset.x64=FB00
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16232.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A7D38
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8DD41
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39F35
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=287B4
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3E0C9
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=CC15
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=4650F
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=FB00
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16237.1001]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A7F38
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8E911
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39F85
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1BC84
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3E119
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=DA55
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=4655D
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=2180C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16241.1001]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A7F38
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8E911
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39F85
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1BC84
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3E119
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=DA55
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=4655D
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=2180C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16251.0]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=ABC88
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8EC21
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=3A525
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1BCB4
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=31779
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=DAF5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=447FD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=2183C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16251.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=ABC88
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8EC21
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=3A525
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1BCB4
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=31779
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=DAF5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=447FD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=2183C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16257.1]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AB718
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8E841
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=33925
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=11364
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3C409
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=1EFD5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=4504D
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=2495C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16257.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AB718
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8E841
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=33925
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=11364
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3C409
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=1EFD5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=4504D
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=2495C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16273.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AB798
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8E871
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=33925
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=11364
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3C409
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=1EFD5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=4504D
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=2495C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16275.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A9388
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=90001
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39435
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C724
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DE89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D75
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=463D4
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D0C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16278.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A9388
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=90001
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39435
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C724
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DE89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D75
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=463D4
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D0C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16281.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A8E08
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8FD01
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39215
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C774
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DC89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D85
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=461BD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D5C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16288.1]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A8E08
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8FD01
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39215
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C774
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DC89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D85
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=461BD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D5C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16291.0]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A8E08
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8FD01
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39215
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C774
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DC89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D85
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=461BD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D5C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16294.1]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A8E08
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8FD01
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39215
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C774
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DC89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D85
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=461BD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D5C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16296.0]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A8E08
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8FD01
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39215
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C774
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DC89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D85
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=461BD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D5C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16299.0]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A8E08
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8FD01
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39215
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C774
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DC89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D85
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=461BD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D5C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16299.15]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A8E08
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8FD01
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39215
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C774
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DC89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D85
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=461BD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D5C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16353.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A9388
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=90001
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=39435
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1C724
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DE89
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D75
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=463D4
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D0C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.16362.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A8E38
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8FBA1
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=2F61C
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=19D1C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DE99
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D85
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=463D4
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D9C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17004.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=A8EB8
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8FB41
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=2F65C
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=19D1C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=3DF09
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=12D85
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=4643F
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22D9C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17017.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AB388
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8F291
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=3477C
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1977C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=31049
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=125A5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=45CDD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=227DC
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17025.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AB498
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8F291
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=3477C
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1977C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=31049
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=125A5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=45CDD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=227DC
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17035.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AB3F8
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8F271
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=354AC
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=14E7C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=31F19
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=10CB5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=45C4D
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22AEC
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17046.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AB3F8
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=8F281
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=354AC
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=14E8C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=31F19
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=10CC5
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=45C4D
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22AFC
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17063.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AD7F8
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=92671
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=36B0C
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=153CC
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=33569
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=111CE
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=474AD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=2318C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17115.1]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AD738
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=925D1
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=36B0C
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1511C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=33569
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=10E78
+DefPolicyCode.x64=CDefPolicy_Query_edi_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=474AD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22E6C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17128.1]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AD738
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=925D1
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=36B0C
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1511C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=33569
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=10E78
+DefPolicyCode.x64=CDefPolicy_Query_edi_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=474AD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22E6C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17133.1]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AD738
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=925D1
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=36B0C
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1511C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=33569
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=10E78
+DefPolicyCode.x64=CDefPolicy_Query_edi_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=474AD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22E6C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17134.1]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AD738
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=925D1
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelper::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=36B0C
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1511C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=33569
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=10E78
+DefPolicyCode.x64=CDefPolicy_Query_edi_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=474AD
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=22E6C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17723.1000]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=75D91
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelperMgr::IsSingleSessionPerUserEnabled
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1296C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=17A45
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=1B10C
+SLInitFunc.x64=New_CSLQuery_Initialize
+
+[10.0.17763.1]
+; Patch CEnforcementCore::GetInstanceOfTSLicense
+LocalOnlyPatch.x86=1
+LocalOnlyOffset.x86=AF8E4
+LocalOnlyCode.x86=jmpshort
+LocalOnlyPatch.x64=1
+LocalOnlyOffset.x64=77941
+LocalOnlyCode.x64=jmpshort
+; Patch CSessionArbitrationHelperMgr::IsSingleSessionPerUserEnabled
+SingleUserPatch.x86=1
+SingleUserOffset.x86=4D505
+SingleUserCode.x86=nop
+SingleUserPatch.x64=1
+SingleUserOffset.x64=1322C
+SingleUserCode.x64=Zero
+; Patch CDefPolicy::Query
+DefPolicyPatch.x86=1
+DefPolicyOffset.x86=4BD09
+DefPolicyCode.x86=CDefPolicy_Query_eax_ecx
+DefPolicyPatch.x64=1
+DefPolicyOffset.x64=17F45
+DefPolicyCode.x64=CDefPolicy_Query_eax_rcx
+; Hook CSLQuery::Initialize
+SLInitHook.x86=1
+SLInitOffset.x86=5B02A
+SLInitFunc.x86=New_CSLQuery_Initialize
+SLInitHook.x64=1
+SLInitOffset.x64=1ABFC
 SLInitFunc.x64=New_CSLQuery_Initialize
 
 [SLInit]
@@ -3248,6 +4449,63 @@ bMultimonAllowed.x64  =F9064
 bServerSku.x64        =F9068
 ulMaxDebugSessions.x64=F906C
 bRemoteConnAllowed.x64=F9070
+
+[6.3.9600.18708-SLInit]
+bFUSEnabled.x86       =D3068
+lMaxUserSessions.x86  =D306C
+bAppServerAllowed.x86 =D3070
+bInitialized.x86      =D3074
+bMultimonAllowed.x86  =D3078
+bServerSku.x86        =D307C
+ulMaxDebugSessions.x86=D3080
+bRemoteConnAllowed.x86=D3084
+
+bFUSEnabled.x64       =FA054
+lMaxUserSessions.x64  =FA058
+bAppServerAllowed.x64 =FA05C
+bInitialized.x64      =FA060
+bMultimonAllowed.x64  =FA064
+bServerSku.x64        =FA068
+ulMaxDebugSessions.x64=FA06C
+bRemoteConnAllowed.x64=FA070
+
+[6.3.9600.18928-SLInit]
+bFUSEnabled.x86       =D3068
+lMaxUserSessions.x86  =D306C
+bAppServerAllowed.x86 =D3070
+bInitialized.x86      =D3074
+bMultimonAllowed.x86  =D3078
+bServerSku.x86        =D307C
+ulMaxDebugSessions.x86=D3080
+bRemoteConnAllowed.x86=D3084
+
+bFUSEnabled.x64       =FA054
+lMaxUserSessions.x64  =FA058
+bAppServerAllowed.x64 =FA05C
+bInitialized.x64      =FA060
+bMultimonAllowed.x64  =FA064
+bServerSku.x64        =FA068
+ulMaxDebugSessions.x64=FA06C
+bRemoteConnAllowed.x64=FA070
+
+[6.3.9600.19093-SLInit]
+bFUSEnabled.x86       =D3068
+lMaxUserSessions.x86  =D306C
+bAppServerAllowed.x86 =D3070
+bInitialized.x86      =D3074
+bMultimonAllowed.x86  =D3078
+bServerSku.x86        =D307C
+ulMaxDebugSessions.x86=D3080
+bRemoteConnAllowed.x86=D3084
+
+bFUSEnabled.x64       =FA054
+lMaxUserSessions.x64  =FA058
+bAppServerAllowed.x64 =FA05C
+bInitialized.x64      =FA060
+bMultimonAllowed.x64  =FA064
+bServerSku.x64        =FA068
+ulMaxDebugSessions.x64=FA06C
+bRemoteConnAllowed.x64=FA070
 
 [6.4.9841.0-SLInit]
 bFUSEnabled.x86       =BF9F0
@@ -3783,6 +5041,44 @@ bMultimonAllowed.x86  =C1F80
 ulMaxDebugSessions.x86=C1F84
 bFUSEnabled.x86       =C1F88
 
+[10.0.14393.1737-SLInit]
+bInitialized.x86      =C1F6C
+bServerSku.x86        =C1F70
+lMaxUserSessions.x86  =C1F74
+bAppServerAllowed.x86 =C1F78
+bRemoteConnAllowed.x86=C1F7C
+bMultimonAllowed.x86  =C1F80
+ulMaxDebugSessions.x86=C1F84
+bFUSEnabled.x86       =C1F88
+
+bServerSku.x64        =E73D0
+lMaxUserSessions.x64  =E73D4
+bAppServerAllowed.x64 =E73D8
+bInitialized.x64      =E8470
+bRemoteConnAllowed.x64=E8474
+bMultimonAllowed.x64  =E8478
+ulMaxDebugSessions.x64=E847C
+bFUSEnabled.x64       =E8480
+
+[10.0.14393.2457-SLInit]
+bInitialized.x86      =C1F94
+bServerSku.x86        =C1F98
+lMaxUserSessions.x86  =C1F9C
+bAppServerAllowed.x86 =C1FA0
+bRemoteConnAllowed.x86=C1FA4
+bMultimonAllowed.x86  =C1FA8
+ulMaxDebugSessions.x86=C1FAC
+bFUSEnabled.x86       =C1FB0
+
+bServerSku.x64        =E73D0
+lMaxUserSessions.x64  =E73D4
+bAppServerAllowed.x64 =E73D8
+bInitialized.x64      =E8470
+bRemoteConnAllowed.x64=E8474
+bMultimonAllowed.x64  =E8478
+ulMaxDebugSessions.x64=E847C
+bFUSEnabled.x64       =E8480
+
 [10.0.14901.1000-SLInit]
 bInitialized.x86      =C1F6C
 bServerSku.x86        =C1F70
@@ -4316,6 +5612,26 @@ bServerSku.x64        =E9484
 lMaxUserSessions.x64  =E9488
 bAppServerAllowed.x64 =E948C
 
+[10.0.15063.994-SLInit]
+bInitialized.x64      =E9468
+bRemoteConnAllowed.x64=E946C
+bMultimonAllowed.x64  =E9470
+ulMaxDebugSessions.x64=E9474
+bFUSEnabled.x64       =E9478
+bServerSku.x64        =E9484
+lMaxUserSessions.x64  =E9488
+bAppServerAllowed.x64 =E948C
+
+[10.0.15063.1155-SLInit]
+bInitialized.x64      =E9468
+bRemoteConnAllowed.x64=E946C
+bMultimonAllowed.x64  =E9470
+ulMaxDebugSessions.x64=E9474
+bFUSEnabled.x64       =E9478
+bServerSku.x64        =E9484
+lMaxUserSessions.x64  =E9488
+bAppServerAllowed.x64 =E948C
+
 [10.0.16179.1000-SLInit]
 bInitialized.x86      =C7F6C
 bServerSku.x86        =C7F70
@@ -4391,3 +5707,583 @@ bRemoteConnAllowed.x64=EB4A4
 bMultimonAllowed.x64  =EB4A8
 ulMaxDebugSessions.x64=EB4AC
 bFUSEnabled.x64       =EB4B0
+
+[10.0.16232.1000-SLInit]
+bInitialized.x86      =C5F78
+bServerSku.x86        =C5F7C
+lMaxUserSessions.x86  =C5F80
+bAppServerAllowed.x86 =C5F84
+bRemoteConnAllowed.x86=C5F88
+bMultimonAllowed.x86  =C5F8C
+ulMaxDebugSessions.x86=C5F90
+bFUSEnabled.x86       =C5F94
+
+bServerSku.x64        =EA3E8
+lMaxUserSessions.x64  =EA3EC
+bAppServerAllowed.x64 =EA3F0
+bInitialized.x64      =EB4A0
+bRemoteConnAllowed.x64=EB4A4
+bMultimonAllowed.x64  =EB4A8
+ulMaxDebugSessions.x64=EB4AC
+bFUSEnabled.x64       =EB4B0
+
+[10.0.16237.1001-SLInit]
+bInitialized.x86      =C5F78
+bServerSku.x86        =C5F7C
+lMaxUserSessions.x86  =C5F80
+bAppServerAllowed.x86 =C5F84
+bRemoteConnAllowed.x86=C5F88
+bMultimonAllowed.x86  =C5F8C
+ulMaxDebugSessions.x86=C5F90
+bFUSEnabled.x86       =C5F94
+
+bServerSku.x64        =EB3EC
+lMaxUserSessions.x64  =EB3F0
+bAppServerAllowed.x64 =EB3F4
+bInitialized.x64      =EC4A0
+bRemoteConnAllowed.x64=EC4A4
+bMultimonAllowed.x64  =EC4A8
+ulMaxDebugSessions.x64=EC4AC
+bFUSEnabled.x64       =EC4B0
+
+[10.0.16241.1001-SLInit]
+bInitialized.x86      =C5F78
+bServerSku.x86        =C5F7C
+lMaxUserSessions.x86  =C5F80
+bAppServerAllowed.x86 =C5F84
+bRemoteConnAllowed.x86=C5F88
+bMultimonAllowed.x86  =C5F8C
+ulMaxDebugSessions.x86=C5F90
+bFUSEnabled.x86       =C5F94
+
+bServerSku.x64        =EB3EC
+lMaxUserSessions.x64  =EB3F0
+bAppServerAllowed.x64 =EB3F4
+bInitialized.x64      =EC4A0
+bRemoteConnAllowed.x64=EC4A4
+bMultimonAllowed.x64  =EC4A8
+ulMaxDebugSessions.x64=EC4AC
+bFUSEnabled.x64       =EC4B0
+
+[10.0.16251.0-SLInit]
+bInitialized.x86      =C9F78
+bServerSku.x86        =C9F7C
+lMaxUserSessions.x86  =C9F80
+bAppServerAllowed.x86 =C9F84
+bRemoteConnAllowed.x86=C9F88
+bMultimonAllowed.x86  =C9F8C
+ulMaxDebugSessions.x86=C9F90
+bFUSEnabled.x86       =C9F94
+
+bServerSku.x64        =EB3EC
+lMaxUserSessions.x64  =EB3F0
+bAppServerAllowed.x64 =EB3F4
+bInitialized.x64      =EC4A0
+bRemoteConnAllowed.x64=EC4A4
+bMultimonAllowed.x64  =EC4A8
+ulMaxDebugSessions.x64=EC4AC
+bFUSEnabled.x64       =EC4B0
+
+[10.0.16251.1000-SLInit]
+bInitialized.x86      =C9F78
+bServerSku.x86        =C9F7C
+lMaxUserSessions.x86  =C9F80
+bAppServerAllowed.x86 =C9F84
+bRemoteConnAllowed.x86=C9F88
+bMultimonAllowed.x86  =C9F8C
+ulMaxDebugSessions.x86=C9F90
+bFUSEnabled.x86       =C9F94
+
+bServerSku.x64        =EB3EC
+lMaxUserSessions.x64  =EB3F0
+bAppServerAllowed.x64 =EB3F4
+bInitialized.x64      =EC4A0
+bRemoteConnAllowed.x64=EC4A4
+bMultimonAllowed.x64  =EC4A8
+ulMaxDebugSessions.x64=EC4AC
+bFUSEnabled.x64       =EC4B0
+
+[10.0.16257.1-SLInit]
+bInitialized.x86      =C9F7C
+bServerSku.x86        =C9F80
+lMaxUserSessions.x86  =C9F84
+bAppServerAllowed.x86 =C9F88
+bRemoteConnAllowed.x86=C9F8C
+bMultimonAllowed.x86  =C9F90
+ulMaxDebugSessions.x86=C9F94
+bFUSEnabled.x86       =C9F98
+
+bServerSku.x64        =EB3F0
+lMaxUserSessions.x64  =EB3F4
+bAppServerAllowed.x64 =EB3F8
+bInitialized.x64      =EC4A0
+bRemoteConnAllowed.x64=EC4A4
+bMultimonAllowed.x64  =EC4A8
+ulMaxDebugSessions.x64=EC4AC
+bFUSEnabled.x64       =EC4B0
+
+[10.0.16257.1000-SLInit]
+bInitialized.x86      =C9F7C
+bServerSku.x86        =C9F80
+lMaxUserSessions.x86  =C9F84
+bAppServerAllowed.x86 =C9F88
+bRemoteConnAllowed.x86=C9F8C
+bMultimonAllowed.x86  =C9F90
+ulMaxDebugSessions.x86=C9F94
+bFUSEnabled.x86       =C9F98
+
+bServerSku.x64        =EB3F0
+lMaxUserSessions.x64  =EB3F4
+bAppServerAllowed.x64 =EB3F8
+bInitialized.x64      =EC4A0
+bRemoteConnAllowed.x64=EC4A4
+bMultimonAllowed.x64  =EC4A8
+ulMaxDebugSessions.x64=EC4AC
+bFUSEnabled.x64       =EC4B0
+
+[10.0.16273.1000-SLInit]
+bInitialized.x86      =C9F7C
+bServerSku.x86        =C9F80
+lMaxUserSessions.x86  =C9F84
+bAppServerAllowed.x86 =C9F88
+bRemoteConnAllowed.x86=C9F8C
+bMultimonAllowed.x86  =C9F90
+ulMaxDebugSessions.x86=C9F94
+bFUSEnabled.x86       =C9F98
+
+bServerSku.x64        =EB3F0
+lMaxUserSessions.x64  =EB3F4
+bAppServerAllowed.x64 =EB3F8
+bInitialized.x64      =EC4A0
+bRemoteConnAllowed.x64=EC4A4
+bMultimonAllowed.x64  =EC4A8
+ulMaxDebugSessions.x64=EC4AC
+bFUSEnabled.x64       =EC4B0
+
+[10.0.16275.1000-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16278.1000-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16281.1000-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16288.1-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16291.0-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16294.1-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16296.0-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16299.0-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16299.15-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16353.1000-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.16362.1000-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.17004.1000-SLInit]
+bInitialized.x86      =C6F7C
+bServerSku.x86        =C6F80
+lMaxUserSessions.x86  =C6F84
+bAppServerAllowed.x86 =C6F88
+bRemoteConnAllowed.x86=C6F8C
+bMultimonAllowed.x86  =C6F90
+ulMaxDebugSessions.x86=C6F94
+bFUSEnabled.x86       =C6F98
+
+bServerSku.x64        =ED3E8
+lMaxUserSessions.x64  =ED3EC
+bAppServerAllowed.x64 =ED3F0
+bInitialized.x64      =EE4A0
+bRemoteConnAllowed.x64=EE4A4
+bMultimonAllowed.x64  =EE4A8
+ulMaxDebugSessions.x64=EE4AC
+bFUSEnabled.x64       =EE4B0
+
+[10.0.17017.1000-SLInit]
+bInitialized.x86      =C9EB8
+bServerSku.x86        =C9EBC
+lMaxUserSessions.x86  =C9EC0
+bAppServerAllowed.x86 =C9EC4
+bRemoteConnAllowed.x86=C9EC8
+bMultimonAllowed.x86  =C9ECC
+ulMaxDebugSessions.x86=C9ED0
+bFUSEnabled.x86       =C9ED4
+
+bServerSku.x64        =EC2E8
+lMaxUserSessions.x64  =EC2EC
+bAppServerAllowed.x64 =EC2F0
+bInitialized.x64      =ED3A0
+bRemoteConnAllowed.x64=ED3A4
+bMultimonAllowed.x64  =ED3A8
+ulMaxDebugSessions.x64=ED3AC
+bFUSEnabled.x64       =ED3B0
+
+[10.0.17025.1000-SLInit]
+bInitialized.x86      =C9EB8
+bServerSku.x86        =C9EBC
+lMaxUserSessions.x86  =C9EC0
+bAppServerAllowed.x86 =C9EC4
+bRemoteConnAllowed.x86=C9EC8
+bMultimonAllowed.x86  =C9ECC
+ulMaxDebugSessions.x86=C9ED0
+bFUSEnabled.x86       =C9ED4
+
+bServerSku.x64        =EC2E8
+lMaxUserSessions.x64  =EC2EC
+bAppServerAllowed.x64 =EC2F0
+bInitialized.x64      =ED3A0
+bRemoteConnAllowed.x64=ED3A4
+bMultimonAllowed.x64  =ED3A8
+ulMaxDebugSessions.x64=ED3AC
+bFUSEnabled.x64       =ED3B0
+
+[10.0.17035.1000-SLInit]
+bInitialized.x86      =C9ED8
+bServerSku.x86        =C9EDC
+lMaxUserSessions.x86  =C9EE0
+bAppServerAllowed.x86 =C9EE4
+bRemoteConnAllowed.x86=C9EE8
+bMultimonAllowed.x86  =C9EEC
+ulMaxDebugSessions.x86=C9EF0
+bFUSEnabled.x86       =C9EF4
+
+bServerSku.x64        =EC2E8
+lMaxUserSessions.x64  =EC2EC
+bAppServerAllowed.x64 =EC2F0
+bInitialized.x64      =ED3A0
+bRemoteConnAllowed.x64=ED3A4
+bMultimonAllowed.x64  =ED3A8
+ulMaxDebugSessions.x64=ED3AC
+bFUSEnabled.x64       =ED3B0
+
+[10.0.17046.1000-SLInit]
+bInitialized.x86      =C9ED8
+bServerSku.x86        =C9EDC
+lMaxUserSessions.x86  =C9EE0
+bAppServerAllowed.x86 =C9EE4
+bRemoteConnAllowed.x86=C9EE8
+bMultimonAllowed.x86  =C9EEC
+ulMaxDebugSessions.x86=C9EF0
+bFUSEnabled.x86       =C9EF4
+
+bServerSku.x64        =EC2E8
+lMaxUserSessions.x64  =EC2EC
+bAppServerAllowed.x64 =EC2F0
+bInitialized.x64      =ED3A0
+bRemoteConnAllowed.x64=ED3A4
+bMultimonAllowed.x64  =ED3A8
+ulMaxDebugSessions.x64=ED3AC
+bFUSEnabled.x64       =ED3B0
+
+[10.0.17063.1000-SLInit]
+bInitialized.x86      =CBF38
+bServerSku.x86        =CBF3C
+lMaxUserSessions.x86  =CBF40
+bAppServerAllowed.x86 =CBF44
+bRemoteConnAllowed.x86=CBF48
+bMultimonAllowed.x86  =CBF4C
+ulMaxDebugSessions.x86=CBF50
+bFUSEnabled.x86       =CBF54
+
+bServerSku.x64        =F1378
+lMaxUserSessions.x64  =F137C
+bAppServerAllowed.x64 =F1380
+bInitialized.x64      =F2430
+bRemoteConnAllowed.x64=F2434
+bMultimonAllowed.x64  =F2438
+ulMaxDebugSessions.x64=F243C
+bFUSEnabled.x64       =F2440
+
+[10.0.17115.1-SLInit]
+bInitialized.x86      =CBF38
+bServerSku.x86        =CBF3C
+lMaxUserSessions.x86  =CBF40
+bAppServerAllowed.x86 =CBF44
+bRemoteConnAllowed.x86=CBF48
+bMultimonAllowed.x86  =CBF4C
+ulMaxDebugSessions.x86=CBF50
+bFUSEnabled.x86       =CBF54
+
+bServerSku.x64        =F1378
+lMaxUserSessions.x64  =F137C
+bAppServerAllowed.x64 =F1380
+bInitialized.x64      =F2430
+bRemoteConnAllowed.x64=F2434
+bMultimonAllowed.x64  =F2438
+ulMaxDebugSessions.x64=F243C
+bFUSEnabled.x64       =F2440
+
+[10.0.17128.1-SLInit]
+bInitialized.x86      =CBF38
+bServerSku.x86        =CBF3C
+lMaxUserSessions.x86  =CBF40
+bAppServerAllowed.x86 =CBF44
+bRemoteConnAllowed.x86=CBF48
+bMultimonAllowed.x86  =CBF4C
+ulMaxDebugSessions.x86=CBF50
+bFUSEnabled.x86       =CBF54
+
+bServerSku.x64        =F1378
+lMaxUserSessions.x64  =F137C
+bAppServerAllowed.x64 =F1380
+bInitialized.x64      =F2430
+bRemoteConnAllowed.x64=F2434
+bMultimonAllowed.x64  =F2438
+ulMaxDebugSessions.x64=F243C
+bFUSEnabled.x64       =F2440
+
+[10.0.17133.1-SLInit]
+bInitialized.x86      =CBF38
+bServerSku.x86        =CBF3C
+lMaxUserSessions.x86  =CBF40
+bAppServerAllowed.x86 =CBF44
+bRemoteConnAllowed.x86=CBF48
+bMultimonAllowed.x86  =CBF4C
+ulMaxDebugSessions.x86=CBF50
+bFUSEnabled.x86       =CBF54
+
+bServerSku.x64        =F1378
+lMaxUserSessions.x64  =F137C
+bAppServerAllowed.x64 =F1380
+bInitialized.x64      =F2430
+bRemoteConnAllowed.x64=F2434
+bMultimonAllowed.x64  =F2438
+ulMaxDebugSessions.x64=F243C
+bFUSEnabled.x64       =F2440
+
+[10.0.17134.1-SLInit]
+bInitialized.x86      =CBF38
+bServerSku.x86        =CBF3C
+lMaxUserSessions.x86  =CBF40
+bAppServerAllowed.x86 =CBF44
+bRemoteConnAllowed.x86=CBF48
+bMultimonAllowed.x86  =CBF4C
+ulMaxDebugSessions.x86=CBF50
+bFUSEnabled.x86       =CBF54
+
+bServerSku.x64        =F1378
+lMaxUserSessions.x64  =F137C
+bAppServerAllowed.x64 =F1380
+bInitialized.x64      =F2430
+bRemoteConnAllowed.x64=F2434
+bMultimonAllowed.x64  =F2438
+ulMaxDebugSessions.x64=F243C
+bFUSEnabled.x64       =F2440
+
+[10.0.17723.1000-SLInit]
+bInitialized.x64      =E9AB0
+bServerSku.x64        =E9AB4
+lMaxUserSessions.x64  =E9AB8
+bAppServerAllowed.x64 =E9AC0
+bRemoteConnAllowed.x64=E9AC4
+bMultimonAllowed.x64  =E9AC8
+ulMaxDebugSessions.x64=E9ACC
+bFUSEnabled.x64       =E9AD0
+
+[10.0.17763.1-SLInit]
+bInitialized.x86      =CD798
+bServerSku.x86        =CD79C
+lMaxUserSessions.x86  =CD7A0
+bAppServerAllowed.x86 =CD7A8
+bRemoteConnAllowed.x86=CD7AC
+bMultimonAllowed.x86  =CD7B0
+ulMaxDebugSessions.x86=CD7B4
+bFUSEnabled.x86       =CD7B8
+
+bInitialized.x64      =ECAB0
+bServerSku.x64        =ECAB4
+lMaxUserSessions.x64  =ECAB8
+bAppServerAllowed.x64 =ECAC0
+bRemoteConnAllowed.x64=ECAC4
+bMultimonAllowed.x64  =ECAC8
+ulMaxDebugSessions.x64=ECACC
+bFUSEnabled.x64       =ECAD0
